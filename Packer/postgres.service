@@ -1,0 +1,13 @@
+[Unit]
+Description=Postgres Container
+After=syslog.target
+
+[Service]
+User=ubuntu
+ExecStartPre=/usr/bin/docker pull postgres
+ExecStart=/usr/bin/docker docker run --name postgresapp3 -e POSTGRES_USER=postgres     -e POSTGRES_DB=application  -e POSTGRES_HOST_AUTH_METHOD=trust -p 5432:5432   -d postgres
+Restart = always
+RestartSec = 5
+
+[Install]
+WantedBy=multi-user.target

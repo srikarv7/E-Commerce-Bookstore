@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.me.pojo.User" table="usertable">
+    <id column="user_id" name="id" type="long">
+      <generator class="native"/>
+    </id>
+    <property column="user_name" name="name" type="string" unique="true"/>
+    <property column="user_password" name="password" type="string"/>
+  </class>
+</hibernate-mapping>
