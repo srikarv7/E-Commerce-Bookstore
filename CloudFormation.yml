@@ -44,6 +44,11 @@ Parameters:
     Description: "Availability Zone for Public Subnet C"
     Type: String
     Default: "us-east-1c"
+  
+  MySQlPort:
+    Description: "Port for the MySQl server in the RDS to interact with"
+    Type: String
+    Default: "3306"
 
   ImageValue:
     Default: ""
@@ -377,8 +382,8 @@ Resources:
         Ref: myVPC
       SecurityGroupIngress:
         - IpProtocol: tcp
-          FromPort: 3306
-          ToPort: 3306
+          FromPort: ${MySQlPort}
+          ToPort: ${MySQlPort}
           SourceSecurityGroupId: !Ref WebAppSecurityGroup
       Tags:
       - Key: Name
@@ -399,7 +404,7 @@ Resources:
                 - !Split
                   - "/"
                   - !Ref "AWS::StackId"
-          - "srikar"
+          - "${UniqueName}"
       BucketEncryption:
         ServerSideEncryptionConfiguration:
           - ServerSideEncryptionByDefault:

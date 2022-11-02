@@ -49,8 +49,8 @@ source "amazon-ebs" "my-ami" {
   vpc_id          = "${var.aws_vpc_id}"
   region          = "${var.aws_region}"
   ami_users       = "${var.aws_acct_list}"
-  ami_name        = "csye6225_MySQL${formatdate("YYYY_MM_DD_hh_mm_ss", timestamp())}"
-  ami_description = "AMI for CSYE 6225"
+  ami_name        = "BookStore_MySQL${formatdate("YYYY_MM_DD_hh_mm_ss", timestamp())}"
+  ami_description = "AMI for E-Commerce Bookstore"
   ami_regions = [
     "us-east-1",
   ]
@@ -81,10 +81,6 @@ build {
     source = "../application-0.0.1-SNAPSHOT.jar"
     destination = "/home/ubuntu/"
   }
-  #provisioner "file"{
-  #  source = "./application-0.0.1-SNAPSHOTPostgres.jar"
-  #  destination = "/home/ubuntu/"
-  #}
 
   provisioner "file"{
     source = "./application.service"
@@ -102,40 +98,5 @@ build {
       "CHECKPOINT_DISABLE=1"
     ]
     script = "./app.sh"
-    // inline = [
-    //   "sudo apt-get update",
-    //   "sudo apt-get upgrade -y",
-    //   "sudo apt-get install nginx -y",
-    //   "sudo apt-get clean",
-
-    //   ## Install Open Jdk 8 java(Do not use this)
-    //   #"sudo add-apt-repository ppa:openjdk-r/ppa",
-    //   #"sudo apt-get update",
-    //   #"sudo apt-get install -y openjdk-8-jdk",
-    //   #"java -version",
-
-    //   ####sudo apt-get install openjdk-11-jdk
-    //   #Provision the file here using file provisioner
-    //   ####java -jar application-0.0.1-SNAPSHOT.jar
-
-
-      
-    //   ## Install PostgreSQL
-    //   #"sudo apt install postgresql postgresql-contrib"
-    //   #"sudo systemctl start postgresql.service"
-
-
-    // ]
   }
 }
-
-
-
-      ## Install tomcat 8
-      #"sudo apt-get install -y tomcat8
-
-      ### wget https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.68/bin/apache-tomcat-9.0.68.tar.gz
-      ### tar -zvxf apache-tomcat-9.0.68.tar.gz
-      ### cd apache-tomcat-9.0.68/
-      ### cd bin/
-      ### ./startup.sh
